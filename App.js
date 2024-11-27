@@ -11,6 +11,7 @@ class linkedlist {
     this.size = 0;
   }
 
+  // Inserts a new node at the end of the list
   insert(data) {
     let newNode = new node(data);
     if (this.head == null) {
@@ -25,6 +26,8 @@ class linkedlist {
     }
     this.size++;
   }
+
+  // Prints all elements in the linked list
   print() {
     let current = this.head;
     let output = "";
@@ -36,23 +39,25 @@ class linkedlist {
     console.log(output);
     console.log(this.size);
   }
+
+  // Inserts a new node at the beginning of the list
   insert1st(data) {
     let newNode = new node(data);
-    // let current = this.head;
     newNode.next = this.head;
     this.head = newNode;
     this.size++;
   }
+
+  // Inserts a new node at a specific index in the list
   insertindex(data, index) {
     if (index > this.size || index < 0) {
-      console.log("galat index");
+      console.log("Invalid index");
       return;
     }
     let newNode = new node(data);
     if (index == 0) {
       newNode.next = this.head;
       this.head = newNode;
-      this.size++;
     } else {
       let currentIndex = 0;
       let current = this.head;
@@ -64,12 +69,21 @@ class linkedlist {
       }
       previous.next = newNode;
       newNode.next = current;
-      this.size++;
     }
+    this.size++;
   }
+
+  // Deletes the first node in the list
   deletebegin() {
+    if (this.head == null) {
+      console.log("List is Empty");
+      return;
+    }
     this.head = this.head.next;
+    this.size--;
   }
+
+  // Deletes the last node in the list
   deletend() {
     if (this.head == null) {
       console.log("list is already empty");
@@ -87,14 +101,17 @@ class linkedlist {
     current.next = null;
     this.size--;
   }
+
+  // Deletes a node at a specific index in the list
   deleteindex(index) {
-    if (index < 0 || index > this.size) {
+    if (index < 0 || index >= this.size) {
       console.log("Invalid index");
       return;
     }
     if (index == 0) {
       this.head = this.head.next;
       this.size--;
+      return;
     }
 
     let currentIndex = 0;
@@ -108,29 +125,30 @@ class linkedlist {
     previous.next = current.next;
     this.size--;
   }
+
+  // Searches for a node with specific data and prints its index
   search(data) {
     let current = this.head;
     let index = 0;
-    while (current.next != null) {
+    while (current != null) {
       if (current.data == data) {
         console.log("Found at : " + index);
         return;
-      } else {
-        current = current.next;
-        index++;
       }
+      current = current.next;
+      index++;
     }
     console.log("Not Found");
     return;
   }
+
+  // Updates the data of a node at a specific index
   update(data, index) {
-    if (index < 0 || index > this.size) {
+    if (index < 0 || index >= this.size) {
       console.log("Invalid index");
       return;
     }
-    if (index == 0) {
-      this.head.data = data;
-    }
+
     let current = this.head;
     let currentIndex = 0;
     while (currentIndex < index) {
@@ -149,8 +167,8 @@ a.insert(40);
 a.insert1st(50);
 a.insertindex(4, 1);
 a.insertindex(4, 5);
-// a.search(51);
 a.update(21, 6);
+a.search(21);
 // a.deleteindex(1);
 // a.deleteindex(3);
 // a.deletebegin();
