@@ -123,8 +123,21 @@ class linkedlist {
     console.log("Not Found");
     return;
   }
-  update(data,index){
-    
+  update(data, index) {
+    if (index < 0 || index > this.size) {
+      console.log("Invalid index");
+      return;
+    }
+    if (index == 0) {
+      this.head.data = data;
+    }
+    let current = this.head;
+    let currentIndex = 0;
+    while (currentIndex < index) {
+      current = current.next;
+      currentIndex++;
+    }
+    current.data = data;
   }
 }
 
@@ -136,7 +149,8 @@ a.insert(40);
 a.insert1st(50);
 a.insertindex(4, 1);
 a.insertindex(4, 5);
-a.search(51);
+// a.search(51);
+a.update(21, 6);
 // a.deleteindex(1);
 // a.deleteindex(3);
 // a.deletebegin();
